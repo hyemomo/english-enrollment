@@ -1,3 +1,4 @@
+import { COLORS } from '@/app/enrollment/constants/colors';
 import React from 'react'
 
 const EnrollmentHeader = () => {
@@ -34,7 +35,7 @@ const EnrollmentHeader = () => {
 
       <p
         style={{
-          color: "#0095d4",
+          color: COLORS.primary,
           fontSize: "14px",
           fontWeight: 600,
           paddingLeft: "14px",
