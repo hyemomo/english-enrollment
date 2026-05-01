@@ -34,14 +34,9 @@ def find_tutor_available_times(tutor_id: int):
                 start_time
         """)
 
-        available_time_result = conn.execute(
-            available_time_sql,
-            {"tutor_id": tutor_id}
-        )
+        available_time_result = conn.execute(available_time_sql, {"tutor_id": tutor_id})
 
-        available_times = [
-            dict(row) for row in available_time_result.mappings().all()
-        ]
+        available_times = [dict(row) for row in available_time_result.mappings().all()]
 
         return {
             "tutor_id": tutor["tutor_id"],
