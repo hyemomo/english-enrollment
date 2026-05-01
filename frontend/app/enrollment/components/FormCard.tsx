@@ -7,6 +7,7 @@ import {
 } from "@/app/enrollment/mocks/enrollments";
 import { formatDate } from "@/app/enrollment/utils/DateUtils";
 import { Calendar } from "@/components/ui/calendar";
+import EnrollmentCalendar from '@/components/ui/EnrollmentCalendar';
 
 type FormCardProps = {
   course: string;
@@ -115,13 +116,13 @@ export default function FormCard({
       </FormRow>
 
       <FormRow label="수업시작일">
-        <Calendar
+        <EnrollmentCalendar
+          variant="primary"
           mode="single"
           selected={startDate}
           onSelect={setStartDate}
           disabled={(date) => date < min || date > max}
         />
-
         <p
           style={{
             margin: "8px 0 0",
