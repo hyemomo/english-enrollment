@@ -7,11 +7,13 @@ def find_tutor_available_times(tutor_id: int):
     with engine.connect() as conn:
         tutor_sql = text("""
             SELECT
-                tutor_id,
-                tutor_name
-            FROM tutors
-            WHERE tutor_id = :tutor_id
-              AND is_active = 1
+                t.tutor_name,
+                c.course_name
+            FROM tutors t
+            JOIN courses c ON t.course_id = c.course_id
+            WHERE t.tutor_id = :tutor_id
+              AND t.is_active = 1
+              AND c.is_active = 1
         """)
 
         tutor_result = conn.execute(tutor_sql, {"tutor_id": tutor_id})
@@ -28,7 +30,7 @@ def find_tutor_available_times(tutor_id: int):
                 CAST(end_time AS CHAR) AS end_time
             FROM tutor_available_times
             WHERE tutor_id = :tutor_id
-              AND is_active = 1
+                AND is_active = 1
             ORDER BY
                 FIELD(day_of_week, 'MON', 'TUE', 'WED', 'THU', 'FRI'),
                 start_time
@@ -39,7 +41,7 @@ def find_tutor_available_times(tutor_id: int):
         available_times = [dict(row) for row in available_time_result.mappings().all()]
 
         return {
-            "tutor_id": tutor["tutor_id"],
             "tutor_name": tutor["tutor_name"],
+            "course_name": tutor["course_name"],
             "available_times": available_times,
         }
