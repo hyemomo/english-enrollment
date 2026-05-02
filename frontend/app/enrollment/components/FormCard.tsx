@@ -6,7 +6,6 @@ import {
   mockTimeSlots,
 } from "@/app/enrollment/mocks/enrollments";
 import { formatDate } from "@/app/enrollment/utils/DateUtils";
-import { Calendar } from "@/components/ui/calendar";
 import EnrollmentCalendar from '@/components/ui/EnrollmentCalendar';
 
 type FormCardProps = {
